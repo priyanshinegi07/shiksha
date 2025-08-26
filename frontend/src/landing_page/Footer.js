@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container text-center">
         
         <h5 className="mb-3" style={{ fontFamily: "'Poppins', sans-serif" }}>
-          ShikshaConnect
+          ShikshaMadeEasy
         </h5>
 
         <div className="mb-3">
@@ -36,7 +36,7 @@ const Footer = () => {
         </div>
 
         <p className="mb-0">
-          &copy; {new Date().getFullYear()} Shiksha. All Rights Reserved.
+          &copy; {new Date().getFullYear()} ShikshaMadeEasy. All Rights Reserved.
         </p>
       </div>
     </footer>

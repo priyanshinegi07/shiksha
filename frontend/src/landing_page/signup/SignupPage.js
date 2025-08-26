@@ -2,30 +2,47 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import "./Signup.css";
-import axios from "axios"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
-    const [formData, setFormData] = useState({
-      name:"",
-      email:"",
-      password:"",
-      role:"Student"
-    })
-    //handle input change
-    const handleChange = (e) => {
-      setFormData({...formData, [e.target.name]: e.target.value});
-    };
-    //handle form submit
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      try{
-        const res = await axios.post("http://localhost:8080/register", formData);
-        console.log(res.data.message);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "student",
+  });
+  const navigate = useNavigate();
+  //handle input change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  //handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:8080/register", formData);
+      console.log(res.data.message);
+
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
       }
-      catch(err) {
-        console.log("err" + err);
+      if (res.data) {
+        localStorage.setItem("id", res.data.id);
+        localStorage.setItem("role", res.data.role);
+        console.log("id ", localStorage.getItem("id"))
       }
+      console.log(res.data)
+      if (res.data.role === "student") {
+        console.log("inside if")
+        navigate("/student-details");
+      } else if (res.data.role === "tutor") {
+        navigate("/tutor-details");
+      }
+    } catch (err) {
+      console.log("err" + err);
     }
+  };
   return (
     <>
       <Navbar />

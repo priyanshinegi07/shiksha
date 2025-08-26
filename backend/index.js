@@ -21,10 +21,12 @@ app.use(express.urlencoded({extended:true}));
 const studentRoutes = require("./routes/student");
 const tutorRoutes = require("./routes/tutor");
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/users");
 
-app.use(studentRoutes)
-app.use(tutorRoutes)
+app.use("/students", studentRoutes)
+app.use("/tutors", tutorRoutes)
 app.use(authRoutes)
+app.use(userRoutes)
 
 app.listen((PORT), () => {
     console.log(`server is running at port ${PORT}`);

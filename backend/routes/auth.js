@@ -11,7 +11,18 @@ router.post("/register", async (req, res) => {
         const {name, email, password, role} = req.body;
         const newUser = new User({name, email, password, role: role.toLowerCase()});
         await newUser.save();
-        res.status(201).json({ message: "User registered successfully" });
+        const token = jwt.sign({
+            id: newUser._id, role: newUser.role
+        },
+        process.env.SECRET,
+        {expiresIn:"1h"}
+        );
+        res.status(201).json({ 
+            message: "User registered successfully",
+            token,
+            role: newUser.role,
+            id: newUser._id
+         });
 
     }
     catch(err) {
@@ -38,11 +49,30 @@ router.post("/login", async (req, res) => {
             { expiresIn: "1h" }
         );
 
-        res.json({ message: "Logged in successfully", token });
+        res.json({ message: "Logged in successfully", token, role : user.role, id: user._id });
     } catch (err) {
         console.log(err)
         res.status(500).json({ message: err.message });
     }
 });
+router.get("/verify-token", (req, res) => {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+        return res.status(401).json({ valid: false, message: "No token provided" });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET);
+        res.json({ 
+            valid: true, 
+            role: decoded.role,  // ✅ send role directly
+            user: decoded        // still send full user details if needed
+        });
+    } catch (err) {
+        res.status(401).json({ valid: false, message: "Invalid or expired token" });
+    }
+});
+
+
 
 module.exports = router;
