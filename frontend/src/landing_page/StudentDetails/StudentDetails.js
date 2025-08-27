@@ -26,7 +26,7 @@ const StudentDetails = () => {
       subject: formData.subject.split(",").map((s) => s.trim()),
     };
     try {
-      const res = await axios.post("http://localhost:8080/students", dataToSend, {
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/students`, dataToSend, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Details saved successfully");

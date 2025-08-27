@@ -13,7 +13,7 @@ const Tutor = () => {
         console.log("res")
         const token = localStorage.getItem("token");
         console.log("Token in frontend:", localStorage.getItem("token"));
-        const res = await axios.get(`http://localhost:8080/tutors/${id}`, {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/tutors/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         
@@ -70,9 +70,9 @@ const Tutor = () => {
             </span>
           ))}
         </p>
-        <Link to={`/tutors/${tutor._id}/edit`} className="btn btn-warning">
+        {/* <Link to={`/tutors/${tutor._id}/edit`} className="btn btn-warning">
                     Edit
-                  </Link>
+                  </Link> */}
         <button className="btn btn-outline-primary btn-sm">
                     Request Contact
                   </button>

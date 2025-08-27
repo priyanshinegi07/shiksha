@@ -8,7 +8,7 @@ const AllTutors = () => {
         const fetchTutors = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await axios.get("http://localhost:8080/tutors", {
+                const res = await axios.get(`${process.env.REACT_APP_API_URL}/tutors`, {
                     headers: {Authorization:`Bearer ${token}`} 
                 })
                 console.log(res.data)

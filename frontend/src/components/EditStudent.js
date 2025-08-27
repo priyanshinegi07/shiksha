@@ -20,7 +20,7 @@ const EditStudent = () => {
       const id = localStorage.getItem("id")
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`http://localhost:8080/students/${id}/edit`, {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/students/${id}/edit`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         
@@ -67,7 +67,7 @@ const EditStudent = () => {
     try {
       console.log("Sending update:", formData);
       const token = localStorage.getItem("token");
-      await axios.patch(`http://localhost:8080/students/${id}`, formData, {
+      await axios.patch(`${process.env.REACT_APP_API_URL}/students/${id}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Student details updated successfully!");

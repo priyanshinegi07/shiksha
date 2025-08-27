@@ -15,7 +15,7 @@ const ProtectedRoutes = ({ children }) => {
         return;
       }
       try {
-        const res = await axios.get("http://localhost:8080/verify-token", {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/verify-token`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -10,7 +10,7 @@ const AllStudents = () => {
     const fetchStudents = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:8080/students");
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/students`);
         console.log(res.data);
         setStudents(res.data);
       } catch (err) {

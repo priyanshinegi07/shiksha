@@ -10,7 +10,7 @@ mongoose.connect(uri)
 .then(() => console.log("connected to db successfully"))
 .catch((err) => console.log(`error connecting to db ${err}`))
 app.use(cors({
-  origin: "http://localhost:3000", // frontend URL
+  origin: process.env.FRONTEND_URL || "http://localhost:3000" , // frontend URL
   credentials: true 
 }));
 

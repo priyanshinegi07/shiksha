@@ -20,8 +20,8 @@ const Navbar = () => {
     try {
       const endpoint =
         role === "tutor"
-          ? `http://localhost:8080/tutors/${id}`
-          : `http://localhost:8080/students/${id}`;
+          ? `${process.env.REACT_APP_API_URL}/${id}`
+          : `${process.env.REACT_APP_API_URL}/${id}`;
 
       const res = await fetch(endpoint, {
         method: "DELETE",

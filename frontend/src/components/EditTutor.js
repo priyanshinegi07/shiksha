@@ -27,7 +27,7 @@ const EditTutor = () => {
       
         const id = localStorage.getItem("id")
         const token = localStorage.getItem("token");
-        const res = await axios.get(`http://localhost:8080/tutors/${id}/edit`, {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/tutors/${id}/edit`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData({
@@ -91,7 +91,7 @@ const EditTutor = () => {
       const id = localStorage.getItem("id")
       const token = localStorage.getItem("token");
       await axios.patch(
-        `http://localhost:8080/tutors/${id}`,
+        `${process.env.REACT_APP_API_URL}/tutors/${id}`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

@@ -10,7 +10,7 @@ const Student = () => {
     const fetchStudent = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`http://localhost:8080/students/${id}`, {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/students/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setStudent(res.data);
